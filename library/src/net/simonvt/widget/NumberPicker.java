@@ -1454,7 +1454,7 @@ public class NumberPicker extends LinearLayout {
         int[] selectorIdices = mSelectorIndices;
         int current = getValue();
         for (int i = 0; i < mSelectorIndices.length; i++) {
-            int selectorIndex = current + (i - SELECTOR_MIDDLE_ITEM_INDEX);
+            int selectorIndex = current - (i - SELECTOR_MIDDLE_ITEM_INDEX);
             if (mWrapSelectorWheel) {
                 selectorIndex = getWrappedSelectorIndex(selectorIndex);
             }
@@ -1491,6 +1491,8 @@ public class NumberPicker extends LinearLayout {
      * @param increment True to increment, false to decrement.
      */
     private void changeCurrentByOne(boolean increment) {
+      increment = !increment; // Reverse it up button makes number increase
+      
         if (mFlingable) {
             mDimSelectorWheelAnimator.cancel();
             mInputText.setVisibility(View.INVISIBLE);
