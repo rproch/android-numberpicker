@@ -16,11 +16,6 @@
 
 package net.simonvt.widget;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -53,6 +48,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
  * A widget that enables the user to select a number form a predefined range.
@@ -1355,7 +1355,8 @@ public class NumberPicker extends LinearLayout {
         final int restoreCount = canvas.save();
 
         if (mSelectorWheelState == SELECTOR_WHEEL_STATE_SMALL) {
-            Rect clipBounds = canvas.getClipBounds();
+            Rect clipBounds = mTempRect;
+            canvas.getClipBounds(clipBounds);
             clipBounds.inset(0, mSelectorElementHeight);
             canvas.clipRect(clipBounds);
         }
@@ -1451,7 +1452,7 @@ public class NumberPicker extends LinearLayout {
      */
     private void initializeSelectorWheelIndices() {
         mSelectorIndexToStringCache.clear();
-        int[] selectorIdices = mSelectorIndices;
+        
         int current = getValue();
         for (int i = 0; i < mSelectorIndices.length; i++) {
             int selectorIndex = current - (i - SELECTOR_MIDDLE_ITEM_INDEX);
