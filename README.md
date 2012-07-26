@@ -3,3 +3,5 @@ Requires JakeWhartons NineOldAndroids library. It is included as a jar, but also
 Probably has to be built against API level 15  
   
 To use this library, it's required that 4 attributes are added to your theme. Check the sample app on how this is done.
+
+Modified to make numbers increase going up instead of down.
